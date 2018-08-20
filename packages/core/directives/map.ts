@@ -511,8 +511,8 @@ export class AgmMap implements OnChanges, OnInit, OnDestroy {
 
     events.forEach((e: Event) => {
       const s = this._mapsWrapper.subscribeToMapEvent<{latLng: LatLng}>(e.name).subscribe(
-          (event: {latLng: LatLng}) => {
-            const value = <MouseEvent>{coords: {lat: event.latLng.lat(), lng: event.latLng.lng()}};
+          (event: {latLng: LatLng, placeId: string}) => {
+            const value = <MouseEvent>{coords: {lat: event.latLng.lat(), lng: event.latLng.lng()}, placeId: event.placeId};
             e.emitter.emit(value);
           });
       this._observableSubscriptions.push(s);
